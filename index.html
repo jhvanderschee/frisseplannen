@@ -2,6 +2,7 @@
 <html>
 <head>
 <title> Frisse plannen </title>
+<meta id="viewport" name="viewport" content="width=1200">
 <style>
     body {background: #ccc;}
     * {padding: 0; margin: 0;}
@@ -13,6 +14,11 @@
     }
 </style>
 <script>
+if (screen.width < 600) {
+  document.getElementById("viewport").setAttribute("content", "width=400");
+} else {
+  document.getElementById("viewport").setAttribute("content", "width=1200");
+}
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
