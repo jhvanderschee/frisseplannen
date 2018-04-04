@@ -14,7 +14,7 @@
     }
 </style>
 <script>
-if (screen.width < 600) {
+if (window.screen.width < 600) {
   document.getElementById("viewport").setAttribute("content", "width=400");
 } else {
   document.getElementById("viewport").setAttribute("content", "width=1200");
@@ -29,11 +29,20 @@ function getQueryVariable(variable)
        }
        return(false);
 }
+
+window.onresize = function(event) {
+    if (document.body.clientWidth < 600) {
+        document.getElementById("mobileimg").setAttribute("src", document.getElementById("mobileimg").getAttribute("data-src"));
+    } else {
+        document.getElementById("desktopimg").setAttribute("src", document.getElementById("desktopimg").getAttribute("data-src"));
+    }
+};
+
 </script>
 </head>
 
-<body>
-<img src="desktop_small.png" class="desktop" border="0" width="1200" height="5346" orgWidth="1200" orgHeight="5346" usemap="#image-maps-2018-04-02-133505" alt="Frisse plannen" />
+<body id="body">
+<img data-src="desktop_small.png" id="desktopimg" class="desktop" border="0" width="1200" height="5346" orgWidth="1200" orgHeight="5346" usemap="#image-maps-2018-04-02-133505" alt="Frisse plannen" />
 <map name="image-maps-2018-04-02-133505" id="ImageMapsCom-image-maps-2018-04-02-133505">
 <area  alt="info@frisseplannen.nl" title="info@frisseplannen.nl" href="mailto:info@frisseplannen.nl" shape="rect" coords="1011,127,1140,145" style="outline:none;" target="_blank"     />
 <area  alt="Whitepaper" title="Whitepaper" href="Whitepaper_7-redenen-waarom-goede-plannen-vaak-stranden.pdf" shape="rect" coords="1028,1296,1150,1498" style="outline:none;" target="_blank"     />
@@ -47,7 +56,7 @@ function getQueryVariable(variable)
 <area  alt="Bel: 0647218000" title="Bel: 0647218000" href="tel:+31647218000" shape="rect" coords="665,5189,911,5238" style="outline:none;" target="_blank"     />
 </map>
 
-<img src="mobile_large.png" class="mobile" border="0" width="400" height="3928" orgWidth="400" orgHeight="3928" usemap="#image-maps-2018-04-02-135811" alt="Frisse plannen" />
+<img data-src="mobile_large.png" id="mobileimg" class="mobile" border="0" width="400" height="3928" orgWidth="400" orgHeight="3928" usemap="#image-maps-2018-04-02-135811" alt="Frisse plannen" />
 <map name="image-maps-2018-04-02-135811" id="ImageMapsCom-image-maps-2018-04-02-135811">
 <area  alt="Bellen" title="Bellen" href="tel:+31647218000" shape="rect" coords="332,15,382,73" style="outline:none;" target="_blank"     />
 <area  alt="Vraag naar de mogelijkheden" title="Vraag naar de mogelijkheden" href="mailto:info@frisseplannen.nl" shape="rect" coords="24,2529,286,2557" style="outline:none;" target="_blank"     />
@@ -57,6 +66,9 @@ function getQueryVariable(variable)
 
 <script>
     window.scrollTo(0, getQueryVariable('scroll'));
+    var evt = document.createEvent('UIEvents');
+    evt.initUIEvent('resize', true, false,window,0);
+    window.dispatchEvent(evt);
 </script>
 
 </body>
